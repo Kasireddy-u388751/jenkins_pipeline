@@ -8,7 +8,7 @@ pipeline {
         stage('clone') {
             steps {
                 // Get some code from a GitHub repository
-                git credentialsId: '9f95bd71-bb93-4e37-b870-8a9c2a1a89af', url: 'https://dheeraj77@bitbucket.org/dheeraj77/pipeline_folder.git'
+                git credentialsId: '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', url: 'https://github.com/Kasireddy-u388751/jenkins_pipeline.git'
 
                 // Run Maven on a Unix agent.
                 // sh "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -21,10 +21,10 @@ pipeline {
 	    stage('build') {
             steps {
                 // Get some code from a GitHub repository
-                // git 'https://dheeraj77@bitbucket.org/dheeraj77/webapplication2.git'
+                // git 'https://github.com/Kasireddy-u388751/jenkins_pipeline.git'
 
                 // Run Maven on a Unix agent.
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                // sh "mvn -Dmaven.test.failure.ignore=true clean package"
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -34,10 +34,10 @@ pipeline {
     	stage('install') {
             steps {
                 // Get some code from a GitHub repository
-                // git 'https://dheeraj77@bitbucket.org/dheeraj77/webapplication2.git'
+                // git 'https://github.com/Kasireddy-u388751/jenkins_pipeline.git'
 
                 // Run Maven on a Unix agent.
-                sh "mvn -Dmaven.test.failure.ignore=true install"
+                // sh "mvn -Dmaven.test.failure.ignore=true install"
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -47,7 +47,7 @@ pipeline {
 		
 		stage('deploy') {
             steps {
-		 	   deploy adapters: [tomcat7(credentialsId: 'c4180bcd-b1de-4150-a7a8-e74b27c9e656', path: '', url: 'http://65.0.100.114:8090/')], contextPath: 'jof', war: '**/*.war'
+		 	  // deploy adapters: [tomcat7(credentialsId: 'c4180bcd-b1de-4150-a7a8-e74b27c9e656', path: '', url: 'http://65.0.100.114:8090/')], contextPath: 'jof', war: '**/*.war'
                 
 				
             
