@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+    environment {
+        PATH="/opt/apache-maven-3.6.3/bin:$PATH"
+    }
+
+    stages {
+        stage('clone') {
+            steps {
+                // Get some code from a GitHub repository
+                git credentialsId: '9f95bd71-bb93-4e37-b870-8a9c2a1a89af', url: 'https://dheeraj77@bitbucket.org/dheeraj77/pipeline_folder.git'
+
+                // Run Maven on a Unix agent.
+                // sh "mvn -Dmaven.test.failure.ignore=true clean package"
+
+                // To run Maven on a Windows agent, use
+                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
+		
+	    stage('build') {
+            steps {
+                // Get some code from a GitHub repository
+                // git 'https://dheeraj77@bitbucket.org/dheeraj77/webapplication2.git'
+
+                // Run Maven on a Unix agent.
+                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+
+                // To run Maven on a Windows agent, use
+                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
+
+    	stage('install') {
+            steps {
+                // Get some code from a GitHub repository
+                // git 'https://dheeraj77@bitbucket.org/dheeraj77/webapplication2.git'
+
+                // Run Maven on a Unix agent.
+                sh "mvn -Dmaven.test.failure.ignore=true install"
+
+                // To run Maven on a Windows agent, use
+                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+			   
+        }
+		
+		stage('deploy') {
+            steps {
+		 	   deploy adapters: [tomcat7(credentialsId: 'c4180bcd-b1de-4150-a7a8-e74b27c9e656', path: '', url: 'http://65.0.100.114:8090/')], contextPath: 'jof', war: '**/*.war'
+                
+				
+            
+			}
+			   
+        }
+		
+	}
+}
